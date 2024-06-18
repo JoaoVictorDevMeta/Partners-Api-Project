@@ -1,0 +1,60 @@
+GET http://localhost:3000/events
+
+### Create an event
+# @name createEvent
+POST http://localhost:3000/events
+Content-Type: application/json
+
+{
+  "name": "Event 1",
+  "description": "Event 1 description",
+  "date": "2020-01-01",
+  "price": 100
+}
+
+###
+@eventId= {{ createEvent.response.body.id }}
+### Find event
+GET http://localhost:3000/events/{{eventId}}
+
+### Update event
+PATCH http://localhost:3000/events/{{eventId}}
+Content-Type: application/json
+
+{
+  "name": "Event 1 updated",
+  "description": "Event 1 description updated",
+  "date": "2020-01-01",
+  "price": 200
+}
+
+### Delete event
+DELETE http://localhost:3000/events/{{eventId}}
+
+### Find all spots
+GET http://localhost:3000/events/{{eventId}}/spots
+
+### create spot
+# @name createSpot
+POST http://localhost:3000/events/{{eventId}}/spots
+Content-Type: application/json
+
+{
+  "name": "A2"
+}
+
+###
+@spotId= {{ createSpot.response.body.id }}
+### Find spot
+GET http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+
+### Update spot
+PATCH http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
+Content-Type: application/json
+
+{
+  "name": "A1 updated"
+}
+
+### Delete spot
+DELETE http://localhost:3000/events/{{eventId}}/spots/{{spotId}}
